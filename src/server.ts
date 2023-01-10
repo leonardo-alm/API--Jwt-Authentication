@@ -1,5 +1,4 @@
 import express from 'express';
-import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 import clientRoutes from './routes/Client';
@@ -19,7 +18,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 
-/** Rules of our API */
+/** Rules */
 router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -35,11 +34,6 @@ router.use((req, res, next) => {
 /** Routes */
 router.use('/clients', clientRoutes);
 router.use('/user', userRoutes);
-
-
-/** Healthcheck */
-router.get('/ping', (req, res, next) => res.redirect('/pong'));
-router.get('/pong', (req, res, next) => res.status(200).json({ msg: 'hype' }));
 
 /** Error handling */
 router.use((req, res, next) => {
