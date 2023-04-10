@@ -57,7 +57,7 @@ const deleteClient = (req: Request, res: Response, next: NextFunction) => {
     const clientId = req.params.clientId;
 
     return Client.findByIdAndDelete(clientId)
-        .then((client) => (client ? res.status(201).json({ client, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
+        .then((client) => (client ? res.status(204).json({ message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
         .catch((error) => res.status(500).json({ error }));
 };
 
